@@ -1,15 +1,12 @@
-import { useState } from "react";
+import React, { useContext } from "react";
 import CartIcon from "../Cart/CartIcon";
 import classes from "./HeaderCartButton.module.css";
-
-import CartTotalCount from "./CartTotalCount";
+import AuthContext from "../../Context/auth-context";
 
 const HeaderCartButton = (props) => {
-  const [showCart, setShowCart] = useState(false);
-
+  const authCtx = useContext(AuthContext);
   return (
-    <button className={classes.button} onClick={() => setShowCart(true)}>
-      {showCart && <CartTotalCount />}
+    <button className={classes.button} onClick={authCtx.isCartOpen}>
       <span className={classes.icon}>
         <CartIcon />
       </span>
