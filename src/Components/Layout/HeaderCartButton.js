@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
 import CartIcon from "../Cart/CartIcon";
 import classes from "./HeaderCartButton.module.css";
-import AuthContext from "../../Context/auth-context";
 
 const HeaderCartButton = (props) => {
-  const authCtx = useContext(AuthContext);
   return (
-    <button className={classes.button} onClick={authCtx.isCartOpen}>
+    <button className={classes.button} onClick={props.onClick}>
       <span className={classes.icon}>
         <CartIcon />
       </span>

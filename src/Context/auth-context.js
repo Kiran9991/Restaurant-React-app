@@ -1,8 +1,8 @@
 import React from "react";
 
 const AuthContext = React.createContext({
-    isCartItem: false,
-    isCartOpen: null
+    isCart: false,
+    showCart: null
 });
 
 export default AuthContext;
