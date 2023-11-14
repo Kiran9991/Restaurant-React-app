@@ -6,7 +6,51 @@
   overflow: auto;
 }
 
+.quantityContainer {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.quantity {
+  width: 30px;
+  height: 30px;
+  border-radius: 20%;
+  background-color: #f1efef;
+  color: #181717;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  border: 1px solid #8b4513;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 5px;
+  right: 40px;
+  background-color: #fcfcfc;
+  border: 1px solid #8b4513;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #000;
+  border-radius: 5px;
+}
+
+.deleteButton:nth-child(1) {
+  right: 45px;
+}
+
+.deleteButton:nth-child(2) {
+  right: 5px;
+}
+
+.deleteButton:hover {
+  background-color: #8b4513; 
+  color: #f8f7f7;
+}
+
 .cartItem {
+  position: relative;
   list-style-type: upper-roman;
   background-color: #eee;
   padding: 10px;

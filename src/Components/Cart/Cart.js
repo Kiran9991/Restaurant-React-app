@@ -2,25 +2,20 @@ import { useContext } from "react";
 import classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import CartContext from "../../store/cart-context";
+import CartItems from "./CartItems";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
 
   let totalQuantity = 0;
 
-  const cartItems = (
-    <ul className={classes["cart-items "]}>
-      {cartCtx.items.map((item) => (
-        <li key={item.id + Math.random()} className={classes["cartItem"]}>
-          Name: {item.name} Price: {item.price} Quantity: {item.quantity}
-        </li>
-      ))}
-    </ul>
-  );
+  for (let prices of cartCtx.items) {
+    totalQuantity += Number(prices.price);
+  }
 
   return (
     <Modal onClose={props.onClose}>
-      {cartItems}
+      <CartItems />
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{totalQuantity}</span>
