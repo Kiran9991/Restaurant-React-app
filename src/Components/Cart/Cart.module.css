@@ -6,6 +6,13 @@
   overflow: auto;
 }
 
+.cartItem {
+  list-style-type: upper-roman;
+  background-color: #eee;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
 .total {
   display: flex;
   justify-content: space-between;
