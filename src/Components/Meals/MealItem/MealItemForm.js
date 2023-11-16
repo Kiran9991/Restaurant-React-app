@@ -10,7 +10,7 @@ const MealItemForm = (props) => {
   const addItemToCart = (e) => {
     e.preventDefault();
     const quantity = document.getElementById("amount_" + props.id).value;
-    cartcntx.addItem({ ...props.item, quantity: quantity })
+    cartcntx.addItem({...props.item, quantity: quantity, id:props.id+Math.random() })
   };
 
   return (

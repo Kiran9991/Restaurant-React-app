@@ -6,32 +6,37 @@ import classes from "../Cart/Cart.module.css";
 const CartItems = () => {
   const cartCtx = useContext(CartContext);
 
-  const uniqueItems = cartCtx.items.reduce((startingValue, currentValue) => {
-    let key = currentValue.name + currentValue.price
+  const uniqueItems = [];
+  const track = new Map();
 
-    if(!startingValue[key]) {
-        startingValue[key] = {
-            name: currentValue.name,
-            price: currentValue.price,
-            quantity: 0
-        }
+  for (let i = 0; i < cartCtx.items.length; i++) {
+    if (track.has(cartCtx.items[i].name)) {
+      let idx = track.get(cartCtx.items[i].name);
+      uniqueItems[idx] = {
+        ...uniqueItems[idx],
+        quantity: Number(uniqueItems[idx].quantity) + Number(cartCtx.items[i].quantity),
+      };
+    } else {
+      uniqueItems.push({ ...cartCtx.items[i] });
+      track.set(cartCtx.items[i].name, uniqueItems.length - 1);
     }
-    startingValue[key].quantity += Number(currentValue.quantity);
-    return startingValue
-  },[])
+  }
 
-  const newUniqueItems = Object.values(uniqueItems);
+  const minusQuantity = (e) => {
+    let itemId = e.target.value;
+    cartCtx.removeItem(itemId);
+  }
 
   return (
     <ul className={classes["cart-items"]}>
-      {newUniqueItems.map((item) => {
+      {uniqueItems.map((item) => {
         return (
           <li key={item.id + Math.random()} className={classes.cartItem}>
             Name: {item.name} Price: {item.price}
             <div className={classes.quantityContainer}>
               <div className={classes.quantity}>x{item.quantity}</div>
             </div>
-            <button className={classes.deleteButton}> - </button>
+            <button className={classes.deleteButton} value={item.id} onClick={minusQuantity}> - </button>
             <button className={classes.deleteButton}> + </button>
           </li>
         );
