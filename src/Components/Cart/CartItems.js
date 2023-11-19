@@ -14,7 +14,8 @@ const CartItems = () => {
       let idx = track.get(cartCtx.items[i].name);
       uniqueItems[idx] = {
         ...uniqueItems[idx],
-        quantity: Number(uniqueItems[idx].quantity) + Number(cartCtx.items[i].quantity),
+        quantity:
+          Number(uniqueItems[idx].quantity) + Number(cartCtx.items[i].quantity),
       };
     } else {
       uniqueItems.push({ ...cartCtx.items[i] });
@@ -22,10 +23,20 @@ const CartItems = () => {
     }
   }
 
-  const minusQuantity = (e) => {
+  const minusQuantityHandler = (e) => {
     let itemId = e.target.value;
     cartCtx.removeItem(itemId);
-  }
+  };
+
+  const addQuantityHandler = (e) => {
+    let itemId = e.target.value;
+    uniqueItems.forEach((item) => {
+      if (item.id === itemId) {
+        cartCtx.addItem(item);
+        console.log(item.id)
+      }
+    });
+  };
 
   return (
     <ul className={classes["cart-items"]}>
@@ -36,8 +47,22 @@ const CartItems = () => {
             <div className={classes.quantityContainer}>
               <div className={classes.quantity}>x{item.quantity}</div>
             </div>
-            <button className={classes.deleteButton} value={item.id} onClick={minusQuantity}> - </button>
-            <button className={classes.deleteButton}> + </button>
+            <button
+              className={classes.deleteButton}
+              value={item.id}
+              onClick={minusQuantityHandler}
+            >
+              {" "}
+              -{" "}
+            </button>
+            <button
+              className={classes.deleteButton}
+              value={item.id}
+              onClick={addQuantityHandler}
+            >
+              {" "}
+              +{" "}
+            </button>
           </li>
         );
       })}
